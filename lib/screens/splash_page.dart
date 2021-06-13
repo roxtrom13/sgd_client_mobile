@@ -10,6 +10,7 @@ class SplashPage extends StatelessWidget {
     return GetBuilder(
       init: SplashController(),
       builder: (_) => Scaffold(
+        backgroundColor: Theme.of(context).primaryColorLight,
         body: Center(
           child: Image.asset('assets/img/logo.png'),
         ),
