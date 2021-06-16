@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sgd_client_mobile/controllers/global_controller.dart';
 
 import 'package:sgd_client_mobile/screens/splash_page.dart';
 
@@ -10,6 +11,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Get.put(GlobalController());
     return GetMaterialApp(
       title: 'Servicios Generales a Domicilio',
       theme: ThemeData(
