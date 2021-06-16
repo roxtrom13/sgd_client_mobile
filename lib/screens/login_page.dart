@@ -36,7 +36,7 @@ class LoginPage extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
-                          color: Theme.of(context).accentColor,
+                          color: Theme.of(context).primaryColor,
                         ),
                       ),
                       Padding(
@@ -66,8 +66,9 @@ class LoginPage extends StatelessWidget {
                           onTap: _.onLogin,
                           child: Container(
                             child: Center(
-                              child: !_.isLoading
-                                  ? Text(
+                              child: _.isLoading
+                                  ? CircularProgressIndicator()
+                                  : Text(
                                       'INGRESAR',
                                       style: TextStyle(
                                         fontSize: 20,
@@ -75,9 +76,8 @@ class LoginPage extends StatelessWidget {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     )
-                                  : CircularProgressIndicator(),
                             ),
-                            color: Theme.of(context).accentColor,
+                            color: Theme.of(context).primaryColor,
                             width: double.infinity,
                             height: 50.0,
                           ),

@@ -12,6 +12,11 @@ class GlobalController extends GetxController {
     this._refreshKey = refresh;
   }
 
+  void clearKeys() {
+    this._refreshKey = '';
+    this._accessKey = '';
+  }
+
 
   @override
     void onInit() {

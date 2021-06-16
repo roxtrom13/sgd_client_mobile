@@ -21,13 +21,19 @@ class LoginController extends GetxController {
 
   onLogin() async {
     isLoading = true;
+    update();
 
     LoggedUser? loggedUser =
         await Auth.instance.login(this._email, this._password);
     if (loggedUser != null) {
       isLoading = false;
       GlobalController().setKeys(loggedUser.access, loggedUser.refresh);
-      Get.off(HomePage());
+      Future.delayed(Duration(seconds: 1), () {
+        Get.off(HomePage());
+      });
+    } else {
+      isLoading = false;
+      update();
     }
   }
 }

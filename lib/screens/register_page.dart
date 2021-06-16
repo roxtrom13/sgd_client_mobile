@@ -29,7 +29,7 @@ class RegisterPage extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
-                            color: Theme.of(context).accentColor,
+                            color: Theme.of(context).primaryColor,
                           ),
                         ),
                       ),
@@ -140,7 +140,7 @@ class RegisterPage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            color: Theme.of(context).accentColor,
+                            color: Theme.of(context).primaryColor,
                             width: double.infinity,
                             height: 50.0,
                           ),
