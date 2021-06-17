@@ -16,15 +16,8 @@ class LoginController extends GetxController {
 
   bool isLoading = false;
 
-  void onChangeEmail(String email) {
-    this._email = email;
-  }
-
-  void onChangePass(String password) {
-    this._password = password;
-  }
-
-  dynamic validateEmail(String email) {
+  String? validateEmail(String email) {
+    _email = email;
     if (email.trim().length < 1) {
       return ("Este campo es obligatorio");
     } else if (email.trim().length > 50) {
@@ -34,6 +27,7 @@ class LoginController extends GetxController {
   }
 
   String? validatePassword(String password) {
+    this._password = password;
     if (password.trim().length < 1) {
       return ("Este campo es obligatorio");
     } else if (password.trim().length < 5) {

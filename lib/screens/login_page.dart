@@ -45,7 +45,6 @@ class LoginPage extends StatelessWidget {
                           padding:
                               EdgeInsets.only(left: 15, right: 30, top: 20),
                           child: TextFormField(
-                            onChanged: _.onChangeEmail,
                             decoration: const InputDecoration(
                               icon: Icon(Icons.email),
                               hintText: 'Correo Electrónico',
@@ -59,7 +58,6 @@ class LoginPage extends StatelessWidget {
                           padding:
                               EdgeInsets.only(left: 15, right: 30, top: 20),
                           child: TextFormField(
-                            onChanged: _.onChangePass,
                             obscureText: true,
                             decoration: const InputDecoration(
                               icon: Icon(Icons.lock),
