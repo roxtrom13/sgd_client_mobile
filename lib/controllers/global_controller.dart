@@ -1,6 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 
 class GlobalController extends GetxController {
+  GlobalKey<FormState> _formKey = GlobalKey();
+
+  GlobalKey<FormState> get formKey => _formKey;
+
   String _accessKey = '';
   String _refreshKey = '';
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/state_manager.dart';
+import 'package:sgd_client_mobile/controllers/global_controller.dart';
 
 import 'package:sgd_client_mobile/screens/register_page.dart';
 import 'package:sgd_client_mobile/controllers/login_controller.dart';
@@ -30,7 +31,7 @@ class LoginPage extends StatelessWidget {
                     height: 30,
                   ),
                   Form(
-                    key: _.formKey,
+                    key: GlobalController().formKey,
                     child: Column(
                       children: [
                         Text(

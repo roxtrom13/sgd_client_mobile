@@ -7,9 +7,7 @@ import 'package:get/route_manager.dart';
 import 'package:sgd_client_mobile/controllers/global_controller.dart';
 
 class LoginController extends GetxController {
-  GlobalKey<FormState> _formKey = GlobalKey();
-
-  GlobalKey<FormState> get formKey => _formKey;
+  GlobalKey<FormState> _formKey = GlobalController().formKey;
 
   String _email = '';
   String _password = '';
