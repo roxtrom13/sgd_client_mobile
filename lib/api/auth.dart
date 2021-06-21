@@ -26,7 +26,6 @@ class Auth {
         "password": password,
       });
       LoggedUser logged = LoggedUser.fromJson(response.data);
-      print(logged.user.groups[0].name);
       return logged;
     } catch (e) {
       if (e is DioError) {

@@ -17,6 +17,7 @@ class User extends Equatable {
   final String? photo;
   final List<Group> groups;
 
+
   User(
     this.id,
     this.username,

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:sgd_client_mobile/controllers/home_controller.dart';
-import 'package:sgd_client_mobile/screens/book_services_page.dart';
-import 'package:sgd_client_mobile/screens/covid_page.dart';
-import 'package:sgd_client_mobile/screens/services_page.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+import 'package:sgd_client_mobile/screens/book_services_page.dart';
+import 'package:sgd_client_mobile/screens/photos_page.dart';
+
+class AltHomePage extends StatelessWidget {
+  const AltHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,8 @@ class HomePage extends StatelessWidget {
           child: IndexedStack(
             index: _.currentIndex,
             children: [
-              ServicesPage(),
               BookServicesPage(),
-              CovidPage(),
+              PhotosPage(),
             ],
           ),
         ),
@@ -55,11 +54,7 @@ class HomePage extends StatelessWidget {
                       children: [
                         ListTile(
                           leading: Icon(Icons.manage_accounts),
-                          title: Text('Mi Cuenta'),
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.today),
-                          title: Text('Mis Servicios'),
+                          title: Text('Gestionar Usuario'),
                         ),
                         ListTile(
                           leading: Icon(Icons.logout),
@@ -76,27 +71,18 @@ class HomePage extends StatelessWidget {
           type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_repair_service),
-              label: 'Servicios',
-              backgroundColor: Theme.of(context).primaryColor,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.event),
-              label: 'Agendar Servicio',
+              icon: Icon(Icons.smart_toy),
+              label: 'Chat bot',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.coronavirus),
-              label: 'Protocolos',
+              label: 'Coronavirus',
             ),
           ],
           onTap: _.onTapButtonNavBar,
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _.routeToChat,
-          child: Icon(Icons.forum_outlined),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),
     );
   }
 }
+

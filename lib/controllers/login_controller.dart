@@ -1,6 +1,7 @@
 import 'package:get/state_manager.dart';
 import 'package:sgd_client_mobile/api/auth.dart';
 import 'package:sgd_client_mobile/models/auth/user.dart';
+import 'package:sgd_client_mobile/screens/alt_home_page.dart';
 import 'package:sgd_client_mobile/screens/home_page.dart';
 import 'package:get/route_manager.dart';
 import 'package:sgd_client_mobile/controllers/global_controller.dart';
@@ -19,7 +20,8 @@ class LoginController extends GetxController {
     this._password = password;
   }
 
-  onLogin() async {
+  Future<void> onLogin() async {
+    GlobalController _global = GlobalController();
     isLoading = true;
     update();
 
@@ -27,9 +29,17 @@ class LoginController extends GetxController {
         await Auth.instance.login(this._email, this._password);
     if (loggedUser != null) {
       isLoading = false;
-      GlobalController().setKeys(loggedUser.access, loggedUser.refresh);
+
+      _global.setKeys(loggedUser.access, loggedUser.refresh);
+      _global.setUser(loggedUser.user);
+
+      int groupId = loggedUser.user.groups[0].id;
       Future.delayed(Duration(seconds: 1), () {
-        Get.off(HomePage());
+        if (groupId == 3) {
+          Get.off(HomePage(), arguments: loggedUser.access);
+        } else {
+          Get.off(AltHomePage());
+        }
       });
     } else {
       isLoading = false;
