@@ -36,7 +36,7 @@ class LoginController extends GetxController {
       int groupId = loggedUser.user.groups[0].id;
       Future.delayed(Duration(seconds: 1), () {
         if (groupId == 3) {
-          Get.off(HomePage(), arguments: loggedUser.access);
+          Get.off(HomePage(), arguments: loggedUser);
         } else {
           Get.off(AltHomePage());
         }

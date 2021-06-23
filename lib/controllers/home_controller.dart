@@ -47,7 +47,7 @@ class HomeController extends GetxController {
   void onInit() async {
     super.onInit();
     GlobalController _g = GlobalController();
-    _g.setAccess(Get.arguments);
+    _g.setAccess(Get.arguments.access);
     this._services = await _g.loadServices();
     update();
   }

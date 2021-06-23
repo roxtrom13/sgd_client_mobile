@@ -73,6 +73,7 @@ class HomePage extends StatelessWidget {
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _.currentIndex,
+          selectedItemColor: Colors.purple[900],
           type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
@@ -92,8 +93,9 @@ class HomePage extends StatelessWidget {
           onTap: _.onTapButtonNavBar,
         ),
         floatingActionButton: FloatingActionButton(
+          heroTag: 'chat',
           onPressed: _.routeToChat,
-          child: Icon(Icons.forum_outlined),
+          child: Icon(Icons.forum_outlined, color: Colors.purple[900],),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),

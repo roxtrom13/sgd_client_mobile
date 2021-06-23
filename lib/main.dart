@@ -15,15 +15,13 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Servicios Generales a Domicilio',
       theme: ThemeData(
-        //primaryColor: Color(0xffb2dfdb),
-        //accentColor: Color(0xff4db6ac),
         primaryColor: Color(0xff4db6ac),
         accentColor: Color(0xffb2dfdb),
         buttonColor: Colors.white,
         primaryColorLight: Color(0xffe5ffff),
         primaryColorDark: Color(0xff82ada9),
       ),
-      home: SplashPage(),
+      home:  SplashPage(),
     );
   }
 }

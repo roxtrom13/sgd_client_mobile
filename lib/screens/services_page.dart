@@ -47,6 +47,7 @@ class ServicesPage extends StatelessWidget {
             width: double.infinity,
           height: 30,
           child: FloatingActionButton.extended(
+              heroTag: 'photos',
               label: Text(
                 'Ver Fotos',
                 style: TextStyle(color: Colors.white),

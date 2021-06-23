@@ -25,8 +25,9 @@ class GlobalController extends GetxController {
     this._refreshKey = refresh;
   }
 
-  void setUser(User usr) {
+  User setUser(User usr) {
     this._user = usr;
+    return this._user as User;
   }
 
   Future<List<Service>> loadServices() async {
