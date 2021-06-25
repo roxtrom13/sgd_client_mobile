@@ -74,7 +74,7 @@ class HomeController extends GetxController {
   void onSelectService(int newValue) async {
     print('technicianValue: ${this._technicianValue}');
     loading = true;
-    this._technicianValue = null;
+    this._technicianValue = 0;
     this._serviceValue = newValue;
     this._technicians = [];
     this._technicians = await ServicesApi.instance

@@ -30,6 +30,7 @@ dependencies:
   http: ^0.13.3
   json_annotation: ^4.0.1
   flutter_speed_dial: ^3.0.5
+  icons_helper: ^1.0.4
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +53,7 @@ flutter:
   assets:
     - assets/img/logo.png
     - assets/img/user.png
+    - assets/img/protocolos.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

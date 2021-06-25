@@ -6,7 +6,11 @@ class CovidPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Covid page'),
+      child: SingleChildScrollView(
+        child: Image(
+          image: AssetImage('assets/img/protocolos.png'),
+        ),
+      ),
     );
   }
 }

@@ -8,8 +8,9 @@ class Service {
   final String name;
   final String description;
   final String image;
+  final String icon;
 
-  Service(this.id, this.name, this.description, this.image);
+  Service(this.id, this.name, this.description, this.image, this.icon);
 
   factory Service.fromJson(Map<String, dynamic> json) => _$ServiceFromJson(json);
 

@@ -12,6 +12,7 @@ Service _$ServiceFromJson(Map<String, dynamic> json) {
     json['name'] as String,
     json['description'] as String,
     json['image'] as String,
+    json['icon'] as String,
   );
 }
 
@@ -20,4 +21,5 @@ Map<String, dynamic> _$ServiceToJson(Service instance) => <String, dynamic>{
       'name': instance.name,
       'description': instance.description,
       'image': instance.image,
+      'icon': instance.icon,
     };
