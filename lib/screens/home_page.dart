@@ -86,7 +86,7 @@ class HomePage extends StatelessWidget {
               label: 'Agendar Servicio',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.coronavirus),
+              icon: Icon(Icons.sanitizer),
               label: 'Protocolos',
             ),
           ],

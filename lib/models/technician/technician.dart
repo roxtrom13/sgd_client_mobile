@@ -9,7 +9,6 @@ part "technician.g.dart";
 )
 class Technician extends Equatable {
   final int? id;
-  final String username;
   final String firstName;
   final String lastName;
   final String email;
@@ -19,7 +18,6 @@ class Technician extends Equatable {
 
   Technician(
     this.id,
-    this.username,
     this.firstName,
     this.lastName,
     this.email,
@@ -29,7 +27,7 @@ class Technician extends Equatable {
 
   @override
   List<Object?> get props =>
-      <Object?>[id, username, firstName, lastName, email, photo];
+      <Object?>[id, firstName, lastName, email, photo];
 
   factory Technician.fromJson(Map<String, dynamic> json) => _$TechnicianFromJson(json);
   Map<String, dynamic> toJson() => _$TechnicianToJson(this);

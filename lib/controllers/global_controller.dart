@@ -2,16 +2,20 @@ import 'package:get/state_manager.dart';
 import 'package:sgd_client_mobile/models/auth/user.dart';
 import 'package:sgd_client_mobile/models/service/service.dart';
 import 'package:sgd_client_mobile/api/services_api.dart';
+import 'package:sgd_client_mobile/models/technician/technician.dart';
 
 class GlobalController extends GetxController {
   String _accessKey = '';
   String _refreshKey = '';
   List<Service>? _services = [];
+  List<Technician>? _technicians = [];
   late User? _user;
 
   User? get user => _user;
 
   List<Service>? get services => _services;
+
+  List<Technician>? get technicians => _technicians;
 
   String get accessKey => _accessKey;
   String get refreshKey => _refreshKey;
@@ -20,9 +24,9 @@ class GlobalController extends GetxController {
     this._accessKey = access;
   }
 
-  void setKeys(String acces, refresh) {
-    this._accessKey = acces;
-    this._refreshKey = refresh;
+  void setKeys(String accesKey, String refreshKey) {
+    this._accessKey = accesKey;
+    this._refreshKey = refreshKey;
   }
 
   User setUser(User usr) {
