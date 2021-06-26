@@ -13,7 +13,8 @@ class ServicesPage extends StatelessWidget {
     return GetBuilder<HomeController>(
       init: HomeController(),
       builder: (_) => Scaffold(
-        body: Center(
+        body: Container(
+          padding: EdgeInsets.only(bottom: 40),
           child: ListView.builder(
             itemBuilder: (__, index) {
               Service? service = _.services[index];

@@ -112,7 +112,7 @@ class BookServicesPage extends StatelessWidget {
                       decoration: InputDecoration(
                         hintText: ((_.time == null)
                             ? 'HH:mm am/pm'
-                            : '${_.time!.hour}:${_.time!.minute} ${_.time!.period.toString().substring(10, 12)}'),
+                            : '${_.time!.hour}:${_.time!.minute.toString().padLeft(2, '0')} ${_.time!.period.toString().substring(10, 12)}'),
                       ),
                     ),
                   ),

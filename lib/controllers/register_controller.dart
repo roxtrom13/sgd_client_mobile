@@ -2,6 +2,7 @@ import 'package:get/state_manager.dart';
 import 'package:sgd_client_mobile/api/auth.dart';
 import 'package:get/route_manager.dart';
 import 'package:sgd_client_mobile/screens/login_page.dart';
+import 'package:flutter/material.dart';
 
 class RegisterController extends GetxController {
   String gender = '';
@@ -27,11 +28,20 @@ class RegisterController extends GetxController {
     print('${this.email}');
     print('${this.password}');
 
-    bool ok = await Auth.instance.register(this.firstName, this.lastName, this.gender, this.phone, this.email, this.password) as bool;
+    bool ok = await Auth.instance.register(this.firstName, this.lastName,
+        this.gender, this.phone, this.email, this.password) as bool;
 
-    if(ok) {
+    if (ok) {
+      Get.snackbar(
+        '¡Usuario registrado!',
+        'Ya puedes iniciar sesión',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.lightGreen[200],
+      );
       isLoading = false;
-      Get.off(LoginPage(), transition: Transition.leftToRight);
+      Future.delayed(Duration(seconds: 2), () {
+        Get.off(LoginPage(), transition: Transition.leftToRight);
+      });
     }
   }
 }

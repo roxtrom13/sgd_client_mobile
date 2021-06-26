@@ -9,7 +9,7 @@ class ServicesApi {
   static ServicesApi _instance = ServicesApi._internal();
   static ServicesApi get instance => _instance;
 
-  final _dio = Dio(BaseOptions(baseUrl: 'http://10.0.2.2:8000/'));
+  final _dio = Dio(BaseOptions(baseUrl: 'http://45.79.48.145:8000/'));
 
   _showError(String msg) {
     return Get.dialog(
