@@ -13,13 +13,13 @@ class PhotosPage extends StatelessWidget {
       init: HomeController(),
       builder: (_) => Scaffold(
         appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.white,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onPressed: () => Get.back(),
           ),
-          onPressed: () => Get.back(),
-        ),
           title: Text(
             'Nuestros Servicios',
             style: TextStyle(color: Colors.white),

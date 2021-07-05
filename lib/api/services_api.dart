@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:sgd_client_mobile/models/service/service.dart';
+import 'package:sgd_client_mobile/models/service/user_scheduled_service.dart';
 import 'package:sgd_client_mobile/models/technician/technician.dart';
 
 class ServicesApi {
@@ -26,6 +27,7 @@ class ServicesApi {
         'v1/services/',
         options: Options(headers: {'Authorization': 'Bearer $auth'}),
       );
+      print(response);
       return (response.data["results"] as List)
           .map((e) => Service.fromJson(e))
           .toList();
@@ -33,6 +35,23 @@ class ServicesApi {
       if (e is DioError) {
         _showError("Hubo un error obteniendo la lista de servicios");
         return [];
+      }
+    }
+  }
+
+  Future<UserScheduledService?> getScheduledService(String auth, int id) async {
+    try {
+      final response = await _dio.get(
+        'v1/scheduled_services/$id/',
+        options: Options(headers: {'Authorization': 'Bearer $auth'}),
+      );
+      UserScheduledService service =
+          UserScheduledService.fromJson(response.data);
+      return service;
+    } catch (e) {
+      if (e is DioError) {
+        _showError("Hubo un error obteniendo la lista de servicios");
+        return null;
       }
     }
   }
@@ -82,6 +101,52 @@ class ServicesApi {
         return [false, e.response];
       }
       return [false, e];
+    }
+  }
+
+  Future<List<UserScheduledService>?> loadScheduledServices(
+      String auth, String query) async {
+    try {
+      final response = await _dio.get(
+        'v1/scheduled_services/',
+        options: Options(headers: {'Authorization': 'Bearer $auth'}),
+        queryParameters: {'status': query, 'paginated': false},
+      );
+      print(response);
+      List<UserScheduledService> res = (response.data as List)
+          .map((e) => UserScheduledService.fromJson(e))
+          .toList();
+      print('response: $res');
+      return res;
+    } catch (e) {
+      if (e is DioError) {
+        _showError("Hubo un error obteniendo la lista de servicios");
+        return [];
+      }
+    }
+  }
+
+  Future<void> createCalification(
+      String auth, int score, String comment, int scheduledService) async {
+    try {
+      final response = await _dio.post(
+        'v1/califications/',
+        options: Options(headers: {'Authorization': 'Bearer $auth'}),
+        data: {
+          "score": score,
+          "comment": comment,
+          "scheduled_service": scheduledService
+        },
+      );
+      print(response);
+    } catch (e) {
+      if (e is DioError) {
+        if (e.response!.statusCode == 200) {
+          _showError(e.response!.data["comment"]);
+        }
+        _showError("Hubo un error obteniendo la lista de servicios");
+        return;
+      }
     }
   }
 }

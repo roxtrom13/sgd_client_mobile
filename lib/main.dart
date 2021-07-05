@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
         primaryColorDark: Color(0xff82ada9),
       ),
       home:  SplashPage(),
+      //home: ServiceRating(),
     );
   }
 }

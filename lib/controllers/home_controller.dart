@@ -7,8 +7,10 @@ import 'package:sgd_client_mobile/models/technician/technician.dart';
 import 'package:sgd_client_mobile/screens/chat_page.dart';
 import 'package:sgd_client_mobile/screens/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:sgd_client_mobile/screens/user_services.dart';
 
 class HomeController extends GetxController {
+  late LoggedUser _loggedUser;
   String _accessKey = '';
   String _refreshKey = '';
   int _currentIndex = 0;
@@ -131,6 +133,10 @@ class HomeController extends GetxController {
     this.reference = ref;
   }
 
+  void myServices() {
+    Get.to(UserServices(), arguments: this._loggedUser);
+  }
+
   void bookService() async {
     List res = await ServicesApi.instance.bookService(
       this._accessKey,
@@ -158,6 +164,7 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    this._loggedUser = Get.arguments;
     this._accessKey = Get.arguments.access;
     this._refreshKey = Get.arguments.refresh;
     this._services = await ServicesApi.instance.loadServices(this._accessKey)

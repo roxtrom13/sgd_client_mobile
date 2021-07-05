@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:sgd_client_mobile/controllers/home_controller.dart';
 
-import 'package:sgd_client_mobile/screens/book_services_page.dart';
-import 'package:sgd_client_mobile/screens/photos_page.dart';
+import 'package:sgd_client_mobile/screens/covid_page.dart';
+import 'package:sgd_client_mobile/screens/notifications_list.dart';
 
 class AltHomePage extends StatelessWidget {
   const AltHomePage({Key? key}) : super(key: key);
@@ -24,8 +24,8 @@ class AltHomePage extends StatelessWidget {
           child: IndexedStack(
             index: _.currentIndex,
             children: [
-              BookServicesPage(),
-              PhotosPage(),
+              NotificationsList(),
+              CovidPage(),
             ],
           ),
         ),

@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sgd_client_mobile/controllers/home_controller.dart';
 import 'package:sgd_client_mobile/models/service/service.dart';
-import 'package:sgd_client_mobile/screens/photos_page.dart';
-//import 'package:icons_helper/icons_helper.dart';
 
-class ServicesPage extends StatelessWidget {
-  const ServicesPage({Key? key}) : super(key: key);
+class NotificationsList extends StatelessWidget {
+  const NotificationsList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,25 +43,6 @@ class ServicesPage extends StatelessWidget {
             itemCount: _.services.length,
           ),
         ),
-        floatingActionButton: SizedBox(
-          width: double.infinity,
-          height: 30,
-          child: FloatingActionButton.extended(
-              heroTag: 'photos',
-              label: Text(
-                'Ver Fotos',
-                style: TextStyle(color: Colors.white),
-              ),
-              backgroundColor: Colors.green[200],
-              elevation: 0,
-              onPressed: () {
-                Get.to(PhotosPage());
-              },
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(0))),
-        ),
-        floatingActionButtonLocation:
-            FloatingActionButtonLocation.miniCenterDocked,
       ),
     );
   }

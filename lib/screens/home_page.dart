@@ -60,6 +60,10 @@ class HomePage extends StatelessWidget {
                         ListTile(
                           leading: Icon(Icons.today),
                           title: Text('Mis Servicios'),
+                          onTap: () {
+                            Navigator.of(context).pop();
+                            _.myServices();
+                          },
                         ),
                         ListTile(
                           leading: Icon(Icons.logout),
@@ -95,7 +99,10 @@ class HomePage extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           heroTag: 'chat',
           onPressed: _.routeToChat,
-          child: Icon(Icons.forum_outlined, color: Colors.purple[900],),
+          child: Icon(
+            Icons.forum_outlined,
+            color: Colors.purple[900],
+          ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),
