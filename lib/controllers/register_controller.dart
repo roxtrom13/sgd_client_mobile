@@ -5,7 +5,7 @@ import 'package:sgd_client_mobile/screens/login_page.dart';
 import 'package:flutter/material.dart';
 
 class RegisterController extends GetxController {
-  String gender = '';
+  String gender = 'F';
   String firstName = '';
   String lastName = '';
   String phone = '';
@@ -19,6 +19,12 @@ class RegisterController extends GetxController {
     update();
   }
 
+  @override
+  void onReady() {
+    super.onReady();
+    update();
+  }
+
   void onRegister() async {
     isLoading = true;
     print('${this.gender}');
@@ -28,10 +34,14 @@ class RegisterController extends GetxController {
     print('${this.email}');
     print('${this.password}');
 
+    bool emailValid = RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(this.email);
+
     bool ok = await Auth.instance.register(this.firstName, this.lastName,
         this.gender, this.phone, this.email, this.password) as bool;
 
-    if (ok) {
+    if (ok && emailValid) {
       Get.snackbar(
         '¡Usuario registrado!',
         'Ya puedes iniciar sesión',

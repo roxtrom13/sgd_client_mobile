@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/state_manager.dart';
 import 'package:sgd_client_mobile/controllers/register_controller.dart';
 
 enum Gender { masculino, femenino }
 
 class RegisterPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RegisterController>(
@@ -52,7 +52,7 @@ class RegisterPage extends StatelessWidget {
                                   _.onChangeGender(value.toString());
                                 },
                               ),
-                          ),
+                            ),
                           ),
                           Expanded(
                             child: ListTile(
@@ -77,7 +77,12 @@ class RegisterPage extends StatelessWidget {
                             child: Padding(
                               padding: EdgeInsets.only(left: 29, right: 1),
                               child: TextFormField(
-                                onChanged: (val) => _.firstName = val.toString(),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[a-zA-ZÀ-ÿ\u00f1\u00d1+|\s]'))
+                                ],
+                                onChanged: (val) =>
+                                    _.firstName = val.toString(),
                                 decoration: const InputDecoration(
                                   hintText: 'Nombres',
                                 ),
@@ -88,6 +93,10 @@ class RegisterPage extends StatelessWidget {
                             child: Padding(
                               padding: EdgeInsets.only(left: 1, right: 29),
                               child: TextFormField(
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[a-zA-ZÀ-ÿ\u00f1\u00d1+|\s]'))
+                                ],
                                 onChanged: (val) => _.lastName = val.toString(),
                                 decoration: const InputDecoration(
                                   hintText: 'Apellidos',
@@ -100,6 +109,11 @@ class RegisterPage extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(left: 30, right: 30, top: 20),
                         child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp('^[0-9]{1,9}'))
+                          ],
                           onChanged: (val) => _.phone = val.toString(),
                           decoration: const InputDecoration(
                             hintText: 'Teléfono',
