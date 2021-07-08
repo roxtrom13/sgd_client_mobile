@@ -38,32 +38,35 @@ class BookServicesPage extends StatelessWidget {
               Container(
                 child: Text('Técnico', style: labelStyle),
               ),
-              (_.technicians.length == 0)
-                  ? Container(
-                      child: DropdownButtonFormField(
-                        hint: Text('Seleccione un técnico'),
-                        items: [
-                          DropdownMenuItem(
-                            child: Text('No se encontraron técnicos'),
-                          )
-                        ],
-                      ),
-                    )
-                  : Container(
-                      child: DropdownButtonFormField(
-                        hint: Text('Seleccione un técnico'),
-                        onChanged: ((newValue) {
-                          _.onSelectTechnician(newValue as int?);
-                        }),
-                        items: _.technicians.map((technician) {
-                          return DropdownMenuItem(
-                            value:
-                                _.loading ? 'Cargando técnicos' : technician.id,
-                            child: Text(technician.firstName),
-                          );
-                        }).toList(),
-                      ),
-                    ),
+              Container(
+                child: _.getTechnicianList(),
+              ),
+              //(_.technicians.length == 0)
+                  //? Container(
+                      //child: DropdownButtonFormField(
+                        //hint: Text('Seleccione un técnico'),
+                        //items: [
+                          //DropdownMenuItem(
+                            //child: Text('No se encontraron técnicos'),
+                          //)
+                        //],
+                      //),
+                    //)
+                  //: Container(
+                      //child: DropdownButtonFormField(
+                        //hint: Text('Seleccione un técnico'),
+                        //onChanged: ((newValue) {
+                          //_.onSelectTechnician(newValue as int?);
+                        //}),
+                        //items: _.technicians.map((technician) {
+                          //return DropdownMenuItem(
+                            //value:
+                                //_.loading ? 'Cargando técnicos' : technician.id,
+                            //child: Text(technician.firstName),
+                          //);
+                        //}).toList(),
+                      //),
+                    //),
               SizedBox(height: 20),
               Row(
                 children: [
@@ -165,10 +168,28 @@ class BookServicesPage extends StatelessWidget {
                         fontSize: 18,
                       ),
                     ),
-                    onPressed: _.bookService,
+                    onPressed: () {
+                      _.bookService();
+                    },
                   ),
                 ),
               ),
+              //Container(
+                //margin: EdgeInsets.only(top: 10, left: 39, right: 30),
+                //color: Colors.purple[900],
+                //child: Center(
+                  //child: TextButton(
+                    //child: Text(
+                      //'CLEAR',
+                      //style: TextStyle(
+                        //color: Colors.white,
+                        //fontSize: 18,
+                      //),
+                    //),
+                    //onPressed: _.cleanForm,
+                  //),
+                //),
+              //),
             ],
           ),
         ),
