@@ -27,6 +27,8 @@ class HomeController extends GetxController {
   DateTime? date;
   TimeOfDay? time;
   String reference = '';
+  Technician? _technician;
+  bool technicianReady = false;
 
   List<Service> get services => _services;
   List<Technician> get technicians => _technicians;
@@ -57,6 +59,51 @@ class HomeController extends GetxController {
     update();
   }
 
+  void onSelectService(int newValue) async {
+    technicianReady = false;
+    this._technician = null;
+    update();
+    print('technicianValue: ${this._technicianValue}');
+    loading = true;
+    this._serviceValue = newValue;
+    this._technicians = [];
+    this._technicians = await ServicesApi.instance
+        .loadTechnicians(this._accessKey, newValue) as List<Technician>;
+    technicianReady = true;
+    loading = false;
+    update();
+  }
+
+  Widget getTechnicianList() {
+    if (!technicianReady) {
+      return DropdownButtonFormField(
+        hint: Text('Seleccione un técnico'),
+        items: [
+          DropdownMenuItem(
+            child: Text('No se encontraron técnicos'),
+          ),
+        ],
+      );
+    }
+    return DropdownButtonFormField(
+      hint: Text('Seleccione un técnico'),
+      items: this.technicians.map(
+        (technician) {
+          this._technician = technician;
+          return DropdownMenuItem(
+            value: this._technician!.id,
+            child: Text('${technician.firstName}'),
+          );
+        },
+      ).toList(),
+      onChanged: (value) {
+        print('value passed on changed: $value');
+        this._technicianValue = value as int?;
+        update();
+      },
+    );
+  }
+
   String formatDate(DateTime? date) {
     String text = date.toString();
     int idx = text.indexOf(' ');
@@ -70,26 +117,6 @@ class HomeController extends GetxController {
     int idx2 = text.indexOf(')');
     String res = text.substring(idx1, idx2);
     return res;
-  }
-
-  // TODO: Fix techinician select on services changes
-  void onSelectService(int newValue) async {
-    print('technicianValue: ${this._technicianValue}');
-    loading = true;
-    this._technicianValue = 0;
-    this._serviceValue = newValue;
-    this._technicians = [];
-    this._technicians = await ServicesApi.instance
-        .loadTechnicians(this._accessKey, newValue) as List<Technician>;
-    loading = false;
-    update();
-    print('onSelectService passed value: ${this._serviceValue}');
-  }
-
-  void onSelectTechnician(int? newValue) async {
-    this._technicianValue = newValue;
-    update();
-    print('onSelectTechnician passed value: ${this._technicianValue}');
   }
 
   void logout() {
@@ -138,6 +165,14 @@ class HomeController extends GetxController {
   }
 
   void bookService() async {
+    print('acess key: ${this._accessKey}');
+    print('service: ${this._serviceValue as int}');
+    print('technician: ${this._technicianValue as int}');
+    print('date: ${formatDate(this.date)}');
+    print('time: ${formatTime(this.time)}');
+    print('');
+    print('reference: ${this.reference}');
+
     List res = await ServicesApi.instance.bookService(
       this._accessKey,
       this._serviceValue as int,
@@ -150,7 +185,9 @@ class HomeController extends GetxController {
     update();
     if (res[0]) {
       Get.snackbar(
-          '¡RESERVA EXITOSA!', 'La reserva del servicio fue satisfactoria!', snackPosition: SnackPosition.BOTTOM);
+          '¡RESERVA EXITOSA!', 'La reserva del servicio fue satisfactoria!',
+          snackPosition: SnackPosition.BOTTOM);
+    update();
     } else {
       Get.dialog(
         AlertDialog(
