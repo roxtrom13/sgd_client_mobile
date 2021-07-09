@@ -25,10 +25,8 @@ class LoginController extends GetxController {
     isLoading = true;
     update();
 
-    //LoggedUser? loggedUser =
-        //await Auth.instance.login(this._email, this._password);
     LoggedUser? loggedUser =
-        await Auth.instance.login('cliente1@gmail.com', 'cliente1234');
+        await Auth.instance.login(this._email, this._password);
     if (loggedUser != null) {
       isLoading = false;
 
@@ -40,7 +38,7 @@ class LoginController extends GetxController {
         if (groupId == 3) {
           Get.off(HomePage(), arguments: loggedUser);
         } else {
-          Get.off(AltHomePage());
+          Get.off(AltHomePage(), arguments: loggedUser);
         }
       });
     } else {
