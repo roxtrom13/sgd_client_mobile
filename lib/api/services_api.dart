@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:sgd_client_mobile/models/service/service.dart';
+import 'package:sgd_client_mobile/models/service/tech_scheduled_service.dart';
 import 'package:sgd_client_mobile/models/service/user_scheduled_service.dart';
 import 'package:sgd_client_mobile/models/technician/technician.dart';
 
@@ -107,6 +108,7 @@ class ServicesApi {
   Future<List<UserScheduledService>?> loadScheduledServices(
       String auth, String query) async {
     try {
+      print('fetching with key: $auth');
       final response = await _dio.get(
         'v1/scheduled_services/',
         options: Options(headers: {'Authorization': 'Bearer $auth'}),
@@ -115,6 +117,29 @@ class ServicesApi {
       print(response);
       List<UserScheduledService> res = (response.data as List)
           .map((e) => UserScheduledService.fromJson(e))
+          .toList();
+      print('response: $res');
+      return res;
+    } catch (e) {
+      if (e is DioError) {
+        _showError("Hubo un error obteniendo la lista de servicios");
+        return [];
+      }
+    }
+  }
+
+  Future<List<TechScheduledService>?> loadTechScheduledServices(
+      String auth, String query) async {
+    try {
+      print('fetching with key: $auth');
+      final response = await _dio.get(
+        'v1/scheduled_services/',
+        options: Options(headers: {'Authorization': 'Bearer $auth'}),
+        queryParameters: {'status': query, 'paginated': false},
+      );
+      print(response);
+      List<TechScheduledService> res = (response.data as List)
+          .map((e) => TechScheduledService.fromJson(e))
           .toList();
       print('response: $res');
       return res;
