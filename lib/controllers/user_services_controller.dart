@@ -4,6 +4,7 @@ import 'package:get/route_manager.dart';
 import 'package:sgd_client_mobile/api/services_api.dart';
 import 'package:sgd_client_mobile/models/auth/user.dart';
 import 'package:sgd_client_mobile/models/service/user_scheduled_service.dart';
+import 'package:sgd_client_mobile/screens/login_page.dart';
 import 'package:sgd_client_mobile/screens/service_rating.dart';
 
 class UserServicesController extends GetxController {
@@ -14,6 +15,7 @@ class UserServicesController extends GetxController {
   int _currentIndex = 0;
   String _accessKey = '';
   String _refreshKey = '';
+  bool logoutLoading = false;
   late User _user;
   List<UserScheduledService> _pendingScheduledServices = [];
   List<UserScheduledService> _completedScheduledServices = [];
@@ -63,6 +65,16 @@ class UserServicesController extends GetxController {
   void onReady() {
     super.onReady();
     print('on ready');
+  }
+
+  void logout() {
+    this.logoutLoading = true;
+    update();
+    this._accessKey = '';
+    this._refreshKey = '';
+    Future.delayed(Duration(seconds: 1), () {
+      Get.off(LoginPage());
+    });
   }
 
   @override
