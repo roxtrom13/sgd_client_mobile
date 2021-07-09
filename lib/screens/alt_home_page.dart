@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
-import 'package:sgd_client_mobile/controllers/home_controller.dart';
+import 'package:sgd_client_mobile/controllers/alt_home_controller.dart';
+import 'package:sgd_client_mobile/screens/services/canceled_tech_services.dart';
+import 'package:sgd_client_mobile/screens/services/completed_tech_services.dart';
+import 'package:sgd_client_mobile/screens/services/pending_tech_services.dart';
 
-import 'package:sgd_client_mobile/screens/covid_page.dart';
-import 'package:sgd_client_mobile/screens/notifications_list.dart';
 
 class AltHomePage extends StatelessWidget {
   const AltHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(
-      init: HomeController(),
+    return GetBuilder<AltHomeController>(
+      init: AltHomeController(),
       builder: (_) => Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.white),
           title: Text(
-            _.titleList[_.currentIndex],
+            'Servicios Agendados',
             style: TextStyle(color: Colors.white),
           ),
         ),
@@ -24,8 +25,9 @@ class AltHomePage extends StatelessWidget {
           child: IndexedStack(
             index: _.currentIndex,
             children: [
-              NotificationsList(),
-              CovidPage(),
+              PendingTechServices(),
+              CompletedTechServices(),
+              CanceledTechServices(),
             ],
           ),
         ),
@@ -54,7 +56,7 @@ class AltHomePage extends StatelessWidget {
                       children: [
                         ListTile(
                           leading: Icon(Icons.manage_accounts),
-                          title: Text('Gestionar Usuario'),
+                          title: Text('Mi Cuenta'),
                         ),
                         ListTile(
                           leading: Icon(Icons.logout),
@@ -68,15 +70,21 @@ class AltHomePage extends StatelessWidget {
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _.currentIndex,
+          selectedItemColor: Colors.purple[900],
           type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.smart_toy),
-              label: 'Chat bot',
+              icon: Icon(Icons.pending_actions),
+              label: 'Pendientes',
+              backgroundColor: Theme.of(context).primaryColor,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.coronavirus),
-              label: 'Coronavirus',
+              icon: Icon(Icons.task_alt),
+              label: 'Completados',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.disabled_by_default),
+              label: 'Cancelados',
             ),
           ],
           onTap: _.onTapButtonNavBar,
