@@ -109,9 +109,10 @@ class BookServicesPage extends StatelessWidget {
                   Expanded(
                     flex: 85,
                     child: TextFormField(
-                        enabled: false,
-                        decoration:
-                            InputDecoration(hintText: 'Compartir ubicación')),
+                      enabled: false,
+                      decoration:
+                          InputDecoration(hintText: 'Compartir ubicación'),
+                    ),
                   ),
                   Expanded(
                     flex: 15,

@@ -22,6 +22,7 @@ class HomeController extends GetxController {
   List<Technician> _technicians = [];
   bool loading = false;
   List<dynamic> days = [];
+  String address = '';
   String daySelected = '';
   bool shareLocation = false;
   DateTime? date;
@@ -55,8 +56,33 @@ class HomeController extends GetxController {
   }
 
   void switchShareLocation(bool value) {
-    this.shareLocation = value;
-    update();
+    if (!this.shareLocation) {
+      Get.defaultDialog(
+        title: "Compartir ubicación",
+        middleText: "¿Desea compartir su ubicación?",
+        textCancel: "Cancelar",
+        textConfirm: "Sí, compartir",
+        cancelTextColor: Colors.purple[900],
+        confirmTextColor: Colors.white,
+        buttonColor: Colors.purple[900],
+        onConfirm: () {
+          this.shareLocation = value;
+          this.address = 'Av. los girasoles Nro 234';
+          print(this.shareLocation);
+          print(this.address);
+          Get.back();
+          update();
+        },
+        onCancel: () {
+          print(this.shareLocation);
+        },
+      );
+    } else {
+      this.shareLocation = value;
+      print(this.shareLocation);
+      update();
+    }
+    //update();
   }
 
   void onSelectService(int newValue) async {
@@ -170,7 +196,7 @@ class HomeController extends GetxController {
     print('technician: ${this._technicianValue as int}');
     print('date: ${formatDate(this.date)}');
     print('time: ${formatTime(this.time)}');
-    print('');
+    print('address: ${this.address}');
     print('reference: ${this.reference}');
 
     List res = await ServicesApi.instance.bookService(
@@ -179,7 +205,7 @@ class HomeController extends GetxController {
       this._technicianValue as int,
       formatDate(this.date),
       formatTime(this.time),
-      '',
+      this.address,
       this.reference,
     );
     update();
@@ -187,7 +213,7 @@ class HomeController extends GetxController {
       Get.snackbar(
           '¡RESERVA EXITOSA!', 'La reserva del servicio fue satisfactoria!',
           snackPosition: SnackPosition.BOTTOM);
-    update();
+      update();
     } else {
       Get.dialog(
         AlertDialog(
